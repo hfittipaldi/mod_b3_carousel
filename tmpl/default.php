@@ -1,22 +1,23 @@
 <?php
 /**
- * @version     1.0
+ * @version     1.0.1
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2016 Magic RM Comunicação. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  */
+
 //No Direct Access
 defined('_JEXEC') or die;
 
 if ($images !== null) :
 ?>
-<div id="carousel" class="carousel slide" data-ride="carousel">
+<div id="carousel<?php echo $module_id; ?>" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
     <?php foreach ($images as $k => $image) : ?>
-        <li data-target="#carousel" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
+        <li data-target="#carousel<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
     <?php endforeach; ?>
     </ol>
 
@@ -42,11 +43,11 @@ if ($images !== null) :
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#carousel<?php echo $module_id; ?>" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+  <a class="right carousel-control" href="#carousel<?php echo $module_id; ?>" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>

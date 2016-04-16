@@ -1,20 +1,21 @@
 <?php
 /**
- * @version     1.0
- * @package     mod_carousel
+ * @version     1.0.1
+ * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2016 Magic RM Comunicação. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  */
+
 //No Direct Access
 defined('_JEXEC') or die;
 
 class ModCarouselHelper
 {
-    public function group_by_key($json)
+    public function groupByKey($json)
     {
-        $imagesJSON = self::_get_json($json);
+        $imagesJSON = self::_getJSON($json);
         if ($imagesJSON !== null)
         {
             $result = array();
@@ -25,7 +26,7 @@ class ModCarouselHelper
                     $result[$k][$i] = $v;
                 }
             }
-            $return = self::_columns_list($result);
+            $return = self::_columnsList($result);
             if ($return !== null)
                 return $return;
         }
@@ -33,7 +34,7 @@ class ModCarouselHelper
         return null;
     }
 
-    private function _get_json($data)
+    private function _getJSON($data)
     {
         $result = json_decode($data, true);
 
@@ -49,7 +50,7 @@ class ModCarouselHelper
     }
 
     // Obter uma lista de colunas
-    private function _columns_list($data)
+    private function _columnsList($data)
     {
         foreach ($data as $key => $row)
         {

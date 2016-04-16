@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="2.5.0" client="site" method="upgrade">
+<extension type="module" version="3.2.0" client="site" method="upgrade">
     <name>B3 Carousel Module</name>
     <author>Hugo Fittipaldi</author>
     <creationDate>April 2016</creationDate>
     <copyright>Copyright (C) 2016 Magic RM Comunicação. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <description>Place a Bootstrap 3 carousel slider in a module position</description>
     <files>
         <filename module="mod_b3_carousel">mod_b3_carousel.php</filename>
