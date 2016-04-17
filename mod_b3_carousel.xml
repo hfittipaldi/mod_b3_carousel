@@ -6,9 +6,10 @@
     <copyright>Copyright (C) 2016 Magic RM Comunicação. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>1.0.1</version>
+    <version>1.1.2.1</version>
     <description>Place a Bootstrap 3 carousel slider in a module position</description>
     <files>
+        <filename>mod_b3_carousel.xml</filename>
         <filename module="mod_b3_carousel">mod_b3_carousel.php</filename>
         <filename>helper.php</filename>
         <folder>tmpl</folder>
@@ -16,86 +17,145 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
+                <field name="directionNav"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Use directional nav?"
+                       description="Turn on or off left/right buttons.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="controlNav"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Use control nav?"
+                       description="Turn on or off underside control blobs.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="interval"
+                       type="text"
+                       default="5000"
+                       label="Interval"
+                       description="The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle." />
+                <field name="pause"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Pauses on mouseenter?"
+                       description="Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="wrap"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Carousel loop"
+                       description="Whether the carousel should cycle continuously or have hard stops.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="keyboard"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Use control keyboard?"
+                       description="Whether the carousel should react to keyboard events.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="myspacer"
+                       type="spacer"
+                       hr="true" />
+
                 <field name="images"
-                    type="repeatable"
-                    icon="list"
-                    description="PLG_TINY_FIELD_TEMPLATE_FIELD_ELEMENTS_DESC"
-                    label="Carousel images"
-                    default="{'main_image':'','background_image':'','title':'','link':'','target':'0','description':'', 'ordering':''}">
-                    <fieldset hidden="true" name="images_modal" repeat="true">
-                        <field name="main_image"
-                               type="media"
-                               preview="tooltip"
-                               directory="images"
-                               label="Main image"
-                               description="This is the main image for this slide" />
-                        <field name="background_image"
-                               type="media"
-                               preview="tooltip"
-                               directory="images"
-                               label="Background image"
-                               description="This image should be at least the width of the module" />
-                        <field name="title"
-                               type="text"
-                               default=""
-                               label="Image title"
-                               description="The title of the image" />
-                        <field name="link"
-                               type="url"
-                               default=""
-                               label="Image link"
-                               description="The link of the image" />
-                        <field name="target"
-                               type="radio"
-                               default="0"
-                               label="Image link target"
-                               description="Choose where the link points to">
-                            <option value="0">Self</option>
-                            <option value="1">Blank</option>
-                        </field>
-                        <field name="description"
-                               type="textarea"
-                               default=""
-                               label="Image description"
-                               description="The description text for the image" />
-                        <field name="ordering"
-                               type="number"
-                               default="1"
-                               min="1"
-                               max="10"
-                               step="1" />
-                    </fieldset>
+                       type="repeatable"
+                       icon="images"
+                       description="PLG_TINY_FIELD_TEMPLATE_FIELD_ELEMENTS_DESC"
+                       label="Carousel images"
+                       maximum="10"
+                       filter="raw"
+                       default="{'ordering':'','main_image':'','background_image':'','title':'','link':'','target':'0','description':''}">
+                    <fields name="params">
+                        <fieldset hidden="true" name="images_modal" repeat="true">
+                            <field name="ordering"
+                                   type="integer"
+                                   default="1"
+                                   class="input-mini"
+                                   first="1"
+                                   last="10"
+                                   step="1" />
+                            <field name="main_image"
+                                   type="media"
+                                   preview="tooltip"
+                                   directory="images"
+                                   label="Main image"
+                                   description="This is the main image for this slide" />
+                            <field name="alternative_image"
+                                   type="media"
+                                   preview="tooltip"
+                                   directory="images"
+                                   label="Alternative image"
+                                   description="Alternative image for small or extra small devices" />
+                            <field name="title"
+                                   type="text"
+                                   default=""
+                                   label="Image title"
+                                   description="The title of the image" />
+                            <field name="link"
+                                   type="url"
+                                   default=""
+                                   label="Image link"
+                                   description="The link of the image" />
+                            <field name="target"
+                                   type="radio"
+                                   default="0"
+                                   label="Image link target"
+                                   description="Choose where the link points to">
+                                <option value="0">Self</option>
+                                <option value="1">Blank</option>
+                            </field>
+                            <field name="description"
+                                   type="textarea"
+                                   label="Image description"
+                                   description="The description text for the image (html)" />
+                        </fieldset>
+                    </fields>
                 </field>
             </fieldset>
 
-			<fieldset name="advanced">
-				<field name="layout"
+            <fieldset name="advanced">
+                <field name="layout"
                        type="modulelayout"
                        label="JFIELD_ALT_LAYOUT_LABEL"
                        description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-				<field name="moduleclass_sfx"
+                <field name="moduleclass_sfx"
                        type="textarea" rows="3"
                        label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
                        description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-				<field name="cache"
+                <field name="cache"
                        type="list"
                        default="1"
                        label="COM_MODULES_FIELD_CACHING_LABEL"
                        description="COM_MODULES_FIELD_CACHING_DESC">
-					<option value="1">JGLOBAL_USE_GLOBAL</option>
-					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
-				</field>
-				<field name="cache_time"
+                    <option value="1">JGLOBAL_USE_GLOBAL</option>
+                    <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+                </field>
+                <field name="cache_time"
                        type="text"
                        default="900"
                        label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
                        description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-				<field name="cachemode"
-                        type="hidden"
-                        default="static">
-                        <option value="static"></option>
-				</field>
-			</fieldset>
+                <field name="cachemode"
+                       type="hidden"
+                       default="static">
+                    <option value="static"></option>
+                </field>
+            </fieldset>
         </fields>
     </config>
 </extension>
