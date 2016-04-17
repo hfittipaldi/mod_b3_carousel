@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.0.1
+ * @version     1.1.2.1
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
@@ -54,13 +54,13 @@ class ModCarouselHelper
     {
         foreach ($data as $key => $row)
         {
-            $main_image[$key]       = $row['main_image'];
-            $background_image[$key] = $row['background_image'];
-            $title[$key]            = $row['title'];
-            $link[$key]             = $row['link'];
-            $target[$key]           = $row['target'];
-            $description[$key]      = $row['description'];
-            $ordering[$key]         = $row['ordering'];
+            $main_image[$key]        = $row['main_image'];
+            $alternative_image[$key] = $row['alternative_image'];
+            $title[$key]             = $row['title'];
+            $link[$key]              = $row['link'];
+            $target[$key]            = $row['target'];
+            $description[$key]       = $row['description'];
+            $ordering[$key]          = $row['ordering'];
         }
 
         // Ordena os dados com ordering ascendente, main_image ascendente
