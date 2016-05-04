@@ -22,8 +22,8 @@
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
-                       label="Use directional nav?"
-                       description="Turn on or off left/right buttons.">
+                       label="Indicators"
+                       description="Turn on or off underside control blobs.">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
@@ -31,8 +31,8 @@
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
-                       label="Use control nav?"
-                       description="Turn on or off underside control blobs.">
+                       label="Left/right controls"
+                       description="Turn on or off left/right buttons.">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
@@ -41,7 +41,7 @@
                        class="btn-group btn-group-yesno radio"
                        default="1"
                        label="Auto slide"
-                       description="If false, carousel will not automatically cycle.">
+                       description="If no, carousel will not automatically cycle.">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
@@ -72,7 +72,7 @@
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
-                       label="Use control keyboard?"
+                       label="Keyboard control"
                        description="Whether the carousel should react to keyboard events.">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
