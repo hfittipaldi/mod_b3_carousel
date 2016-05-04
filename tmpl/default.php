@@ -1,20 +1,20 @@
 <?php
 /**
- * @version     1.1.2.1
+ * @version     1.2.2
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Magic RM Comunicação. All rights reserved.
+ * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  */
 
 //No Direct Access
 defined('_JEXEC') or die;
-//echo '<pre>'; print_r($images); echo '</pre>';
+
 if ($images !== null) :
 ?>
 <div id="carousel-<?php echo $module_id; ?>" class="carousel slide" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
-    <?php if ($directionNav === 1) : ?>
+    <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <?php foreach ($images as $k => $image) : ?>
@@ -30,7 +30,7 @@ if ($images !== null) :
         $styles = '';
         foreach ($images as $k => $image)
         {
-            if ($image['background_image'] !== '')
+            if ($image['background_image'] != '')
             {
                 $styles .= '
     .item-' . $module_id . '-' . $k . ' {
@@ -39,7 +39,7 @@ if ($images !== null) :
             }
         ?>
 
-        <div class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
+        <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
             <?php if ($image['link'] !== '') : ?>
             <a href="<?php echo $image['link']; ?>"<?php echo $image['target']==1 ? ' target="_blank"' : ''; ?>>
                 <img src="<?php echo JUri::base() . $image['main_image']; ?>" alt="<?php echo $image['title']; ?>" />
@@ -48,14 +48,16 @@ if ($images !== null) :
             <img src="<?php echo JUri::base() . $image['main_image']; ?>" alt="<?php echo $image['title']; ?>" />
             <?php endif; ?>
 
-            <div class="carousel-caption">
+            <?php if ($image['description']) : ?>
+            <figcaption class="carousel-caption">
                 <?php echo $image['description']; ?>
-            </div>
-        </div>
+            </figcaption>
+            <?php endif; ?>
+        </figure>
         <?php } ?>
     </div>
 
-    <?php if ($controlNav === 1) : ?>
+    <?php if ($controls === 1) : ?>
     <!-- Controls -->
     <a class="left carousel-control" href="#carousel-<?php echo $module_id; ?>" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -67,7 +69,7 @@ if ($images !== null) :
     </a>
     <?php endif; ?>
 </div>
-<?php $doc->addStyleDeclaration($styles); ?>
+<?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
 <?php else : ?>
 <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Erro</h4>

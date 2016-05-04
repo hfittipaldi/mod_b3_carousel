@@ -3,21 +3,22 @@
     <name>B3 Carousel Module</name>
     <author>Hugo Fittipaldi</author>
     <creationDate>April 2016</creationDate>
-    <copyright>Copyright (C) 2016 Magic RM Comunicação. All rights reserved.</copyright>
+    <copyright>Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>1.1.2.1</version>
-    <description>Place a Bootstrap 3 carousel slider in a module position</description>
+    <version>1.2.2</version>
+    <description>Bootstrap 3 Carousel Module is a module for Joomla 3.2+ which displays a carousel of images.</description>
     <files>
         <filename>mod_b3_carousel.xml</filename>
         <filename module="mod_b3_carousel">mod_b3_carousel.php</filename>
         <filename>helper.php</filename>
+        <filename>index.html</filename>
         <folder>tmpl</folder>
     </files>
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field name="directionNav"
+                <field name="indicators"
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
@@ -26,7 +27,7 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="controlNav"
+                <field name="controls"
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
@@ -35,11 +36,20 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+                <field name="autoslide"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Auto slide"
+                       description="If false, carousel will not automatically cycle.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
                 <field name="interval"
                        type="text"
                        default="5000"
                        label="Interval"
-                       description="The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle." />
+                       description="The amount of time to delay between automatically cycling an item." />
                 <field name="pause"
                        type="radio"
                        class="btn-group btn-group-yesno radio"

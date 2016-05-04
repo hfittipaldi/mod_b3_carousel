@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.1.2.1
+ * @version     1.2.2
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Magic RM Comunicação. All rights reserved.
+ * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  */
 
@@ -21,9 +21,14 @@ $module_id = $module->id;
 
 /* Params */
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-$directionNav    = (int) $params->get('directionNav', 1);
-$controlNav      = (int) $params->get('controlNav', 1);
-$interval        = (int) $params->get('interval') !== 5000 ? ' data-interval="' . (int) $params->get('interval') . '"' : '';
+$indicators      = (int) $params->get('indicators', 1);
+$controls        = (int) $params->get('controls', 1);
+$autoslide       = (int) $params->get('autoslide', 1);
+
+$interval        = (int) $params->get('interval');
+$interval        = $interval !== 5000 ? ' data-interval="' . $interval . '"' : '';
+$interval        = $autoslide !== 0 ? $interval : ' data-interval="false"';
+
 $pause           = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
 $wrap            = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
 $keyboard        = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';

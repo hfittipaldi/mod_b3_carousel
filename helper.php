@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.1.2.1
+ * @version     1.2.2
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Magic RM Comunicação. All rights reserved.
+ * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  */
 
