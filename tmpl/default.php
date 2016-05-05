@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.2.2
+ * @version     1.3.2
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 
 if ($images !== null) :
 ?>
-<div id="carousel-<?php echo $module_id; ?>" class="carousel slide" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+<div id="carousel-<?php echo $module_id; ?>" class="carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">

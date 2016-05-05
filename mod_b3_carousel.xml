@@ -6,7 +6,7 @@
     <copyright>Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>1.2.2</version>
+    <version>1.3.2</version>
     <description>Bootstrap 3 Carousel Module is a module for Joomla 3.2+ which displays a carousel of images.</description>
     <files>
         <filename>mod_b3_carousel.xml</filename>
@@ -15,73 +15,13 @@
         <filename>index.html</filename>
         <folder>tmpl</folder>
     </files>
+    <media destination="mod_b3_carousel" folder="media">
+        <folder>css</folder>
+        <file>index.html</file>
+    </media>
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field name="indicators"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Indicators"
-                       description="Turn on or off underside control blobs.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="controls"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Left/right controls"
-                       description="Turn on or off left/right buttons.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="autoslide"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Auto slide"
-                       description="If no, carousel will not automatically cycle.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="interval"
-                       type="text"
-                       default="5000"
-                       label="Interval"
-                       description="The amount of time to delay between automatically cycling an item." />
-                <field name="pause"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Pauses on mouseenter?"
-                       description="Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="wrap"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Carousel loop"
-                       description="Whether the carousel should cycle continuously or have hard stops.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="keyboard"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Keyboard control"
-                       description="Whether the carousel should react to keyboard events.">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-
-                <field name="myspacer"
-                       type="spacer"
-                       hr="true" />
-
                 <field name="images"
                        type="repeatable"
                        icon="images"
@@ -135,6 +75,79 @@
                                    description="The description text for the image (html)" />
                         </fieldset>
                     </fields>
+                </field>
+
+                <field name="myspacer"
+                       type="spacer"
+                       hr="true" />
+
+                <field name="autoslide"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Auto slide"
+                       description="If no, carousel will not automatically cycle.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="transition"
+                       type="list"
+                       default="0"
+                       label="Transition"
+                       description="Image transition">
+                    <option value="0">Default</option>
+                    <option value="1">Fade</option>
+                </field>
+                <field name="interval"
+                       type="text"
+                       default="5000"
+                       label="Interval"
+                       description="The amount of time to delay between automatically cycling an item." />
+
+                <field name="indicators"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Indicators"
+                       description="Turn on or off underside control blobs.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="controls"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Left/right controls"
+                       description="Turn on or off left/right buttons.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="pause"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Pauses on mouseenter?"
+                       description="Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="wrap"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Carousel loop"
+                       description="Whether the carousel should cycle continuously or have hard stops.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="keyboard"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="1"
+                       label="Keyboard control"
+                       description="Whether the carousel should react to keyboard events.">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
                 </field>
             </fieldset>
 

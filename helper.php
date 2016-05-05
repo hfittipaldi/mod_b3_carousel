@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.2.2
+ * @version     1.3.2
  * @package     mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
