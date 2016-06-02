@@ -6,7 +6,7 @@
     <copyright>Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>1.3.2</version>
+    <version>1.3.2.1</version>
     <description>Bootstrap 3 Carousel Module is a module for Joomla 3.2+ which displays a carousel of images.</description>
     <files>
         <filename>mod_b3_carousel.xml</filename>
@@ -181,4 +181,8 @@
             </fieldset>
         </fields>
     </config>
+
+	<updateservers>
+		<server type="extension" priority="1" name="B3 Carousel Module Update Site">https://raw.github.com/hfittipaldi/mod_b3_carousel/updates/mod_b3_carousel-update.xml</server>
+	</updateservers>
 </extension>
