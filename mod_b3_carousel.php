@@ -1,15 +1,18 @@
 <?php
 /**
- * @version     1.3.2
- * @package     mod_b3_carousel
+ * B3 Carousel Module
+ *
+ * @package     Joomla.Site
+ * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
+ * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
-//No Direct Access
-defined('_JEXEC') or die;
+// no direct access
+defined( '_JEXEC' ) or die;
 
 // Include the syndicate functions only once
 require_once __DIR__ . '/helper.php';
@@ -35,16 +38,16 @@ else
     $transition = '';
 }
 
-$interval        = $interval !== 5000 ? ' data-interval="' . $interval . '"' : '';
-$interval        = $autoslide !== 0 ? $interval : ' data-interval="false"';
+$interval   = $interval !== 5000 ? ' data-interval="' . $interval . '"' : '';
+$interval   = $autoslide !== 0 ? $interval : ' data-interval="false"';
 
-$indicators      = (int) $params->get('indicators', 1);
-$controls        = (int) $params->get('controls', 1);
+$indicators = (int) $params->get('indicators', 1);
+$controls   = (int) $params->get('controls', 1);
 
-$pause           = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
-$wrap            = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
-$keyboard        = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';
+$pause      = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
+$wrap       = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
+$keyboard   = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';
 
-$images          = ModCarouselHelper::groupByKey($params->get('images'));
+$images     = modB3CarouselHelper::groupByKey($params->get('images'));
 
 require JModuleHelper::getLayoutPath('mod_b3_carousel', $params->get('layout', 'default'));

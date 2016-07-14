@@ -1,24 +1,27 @@
 <?php
 /**
- * @version     1.3.2
- * @package     mod_b3_carousel
+ * B3 Carousel Module
+ *
+ * @package     Joomla.Site
+ * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
+ * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
-//No Direct Access
-defined('_JEXEC') or die;
+// no direct access
+defined( '_JEXEC' ) or die;
 
 if ($images !== null) :
 ?>
-<div id="carousel-<?php echo $module_id; ?>" class="carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+<div id="b3Carousel-<?php echo $module_id; ?>" class="carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <?php foreach ($images as $k => $image) : ?>
-        <li data-target="#carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
+        <li data-target="#b3Carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
         <?php endforeach; ?>
     </ol>
     <?php endif; ?>

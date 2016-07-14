@@ -1,18 +1,35 @@
 <?php
 /**
- * @version     1.3.2
- * @package     mod_b3_carousel
+ * B3 Carousel Module
+ *
+ * @package     Joomla.Site
+ * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
+ * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
-//No Direct Access
-defined('_JEXEC') or die;
+// no direct access
+defined( '_JEXEC' ) or die;
 
-class ModCarouselHelper
+/**
+ * Helper for mod_b3_carousel
+ *
+ * @package     Joomla.Site
+ * @subpackage  mod_b3_carousel
+ * @since       1.0
+ */
+class ModB3CarouselHelper
 {
+    /**
+     * Group an object by key
+     *
+     * @param   array  $json An object containing the item data
+     *
+     * @access public
+     */
     public function groupByKey($json)
     {
         $imagesJSON = self::_getJSON($json);
@@ -27,6 +44,7 @@ class ModCarouselHelper
                 }
             }
             $return = self::_columnsList($result);
+
             if ($return !== null)
                 return $return;
         }
@@ -34,6 +52,13 @@ class ModCarouselHelper
         return null;
     }
 
+    /**
+     * Retrieves the data in JSON format
+     *
+     * @param   array  $data An object containing the item data
+     *
+     * @access private
+     */
     private function _getJSON($data)
     {
         $result = json_decode($data, true);
@@ -49,7 +74,13 @@ class ModCarouselHelper
         return null;
     }
 
-    // Obter uma lista de colunas
+    /**
+     * Retrieves the list of columns
+     *
+     * @param   array  $data An object containing the item data
+     *
+     * @access private
+     */
     private function _columnsList($data)
     {
         foreach ($data as $key => $row)
