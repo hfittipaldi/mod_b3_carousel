@@ -30,7 +30,7 @@ class ModB3CarouselHelper
      *
      * @access public
      */
-    public function groupByKey($json)
+    public static function groupByKey($json)
     {
         $imagesJSON = self::_getJSON($json);
         if ($imagesJSON !== null)
@@ -59,7 +59,7 @@ class ModB3CarouselHelper
      *
      * @access private
      */
-    private function _getJSON($data)
+    private static function _getJSON($data)
     {
         $result = json_decode($data, true);
 
@@ -81,7 +81,7 @@ class ModB3CarouselHelper
      *
      * @access private
      */
-    private function _columnsList($data)
+    private static function _columnsList($data)
     {
         foreach ($data as $key => $row)
         {
