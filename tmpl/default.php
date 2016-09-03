@@ -33,7 +33,7 @@ if ($images !== null) :
         $styles = '';
         foreach ($images as $k => $image)
         {
-            if ($image['background_image'] != '')
+            if ($image['alternative_image'] !== '')
             {
                 $styles .= '
     .item-' . $module_id . '-' . $k . ' {

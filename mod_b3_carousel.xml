@@ -29,7 +29,7 @@
                        label="Carousel images"
                        maximum="10"
                        filter="raw"
-                       default="{'ordering':'','main_image':'','background_image':'','title':'','link':'','target':'0','description':''}">
+                       default="{'ordering':'','main_image':'','alternative_image':'','title':'','link':'','target':'0','description':''}">
                     <fields name="params">
                         <fieldset hidden="true" name="images_modal" repeat="true">
                             <field name="ordering"
