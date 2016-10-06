@@ -18,6 +18,7 @@ defined( '_JEXEC' ) or die;
 require_once __DIR__ . '/helper.php';
 
 $doc = JFactory::getDocument();
+$doc->addStyleSheet(JURI::base() . '/media/mod_b3_carousel/css/b3_carousel.css');
 
 /* Module id */
 $module_id = $module->id;
@@ -28,15 +29,7 @@ $autoslide       = (int) $params->get('autoslide', 1);
 $interval        = (int) $params->get('interval', 5000);
 $transition      = (int) $params->get('transition', 0);
 
-if ($transition !== 0)
-{
-    $transition = ' carousel-fade';
-    $doc->addStyleSheet(JURI::base() . '/media/mod_b3_carousel/css/b3_carousel.css');
-}
-else
-{
-    $transition = '';
-}
+$transition = $transition !== 0 ? ' carousel-fade' : '';
 
 $interval   = $interval !== 5000 ? ' data-interval="' . $interval . '"' : '';
 $interval   = $autoslide !== 0 ? $interval : ' data-interval="false"';
