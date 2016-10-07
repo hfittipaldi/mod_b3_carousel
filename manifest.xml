@@ -16,10 +16,10 @@
     </update>
     <update>
         <name>B3 Carousel Module</name>
-        <description>This is mod_b3_carousel 1.3.3</description>
+        <description>This is mod_b3_carousel v1.3.3</description>
         <element>mod_b3_carousel</element>
         <type>module</type>
-        <version>1.3.3</version>
+        <version>v1.3.3</version>
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/hfittipaldi/mod_b3_carousel/releases/download/v1.3.3/mod_b3_carousel-v1.3.3.zip</downloadurl>
         </downloads>
