@@ -15,8 +15,13 @@
 defined( '_JEXEC' ) or die;
 
 if ($images !== null) :
-?>
-<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+
+    if ($fluidContainer === 0) : ?>
+<div class="container">
+    <div class="row">
+    <?php endif; ?>
+
+<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition . $fluid; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -71,11 +76,19 @@ if ($images !== null) :
         <span class="sr-only">Next</span>
     </a>
     <?php endif; ?>
+
+    <?php if ($fluidContainer === 0) : ?>
+    </div>
 </div>
+    <?php endif; ?>
+
+</div>
+
 <?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
 <?php else : ?>
 <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Erro</h4>
     <div class="alert-message">Não existe nehuma imagem cadastrada.</div>
 </div>
+
 <?php endif; ?>

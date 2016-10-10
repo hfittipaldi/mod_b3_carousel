@@ -25,6 +25,9 @@ $module_id = $module->id;
 
 /* Params */
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+$fluidContainer  = (int) $params->get('fluidContainer', 0);
+$fluid           = $fluidContainer === 0 ? ' col-xs-12' : '';
+
 $autoslide       = (int) $params->get('autoslide', 1);
 $interval        = (int) $params->get('interval', 5000);
 $transition      = (int) $params->get('transition', 0);

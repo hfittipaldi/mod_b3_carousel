@@ -81,6 +81,15 @@
                        type="spacer"
                        hr="true" />
 
+                <field name="fluidContainer"
+                       type="radio"
+                       class="btn-group btn-group-yesno radio"
+                       default="0"
+                       label="Fluid Layout"
+                       description="Use Bootstrap's fluid or static container (both are responsive).">
+                    <option value="1">Fluid</option>
+                    <option value="0">Static</option>
+                </field>
                 <field name="autoslide"
                        type="radio"
                        class="btn-group btn-group-yesno radio"
