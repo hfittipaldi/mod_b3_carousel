@@ -6,7 +6,7 @@
     <copyright>Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <version>v1.3.4</version>
+    <version>1.4.1</version>
     <description>Bootstrap 3 Carousel Module is a module for Joomla 3.2+ which displays a carousel of images.</description>
     <files>
         <filename>mod_b3_carousel.xml</filename>
@@ -84,7 +84,7 @@
                 <field name="fluidContainer"
                        type="radio"
                        class="btn-group btn-group-yesno radio"
-                       default="0"
+                       default="1"
                        label="Fluid Layout"
                        description="Use Bootstrap's fluid or static container (both are responsive).">
                     <option value="1">Fluid</option>
