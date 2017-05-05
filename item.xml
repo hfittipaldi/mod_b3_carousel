@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="image">
+        <field name="main_image"
+               type="media"
+               required="true"
+               preview="tooltip"
+               directory=""
+               label="Main image"
+               description="This is the main image for this slide" />
+        <field name="alternative_image"
+               type="media"
+               preview="tooltip"
+               directory=""
+               label="Alternative image"
+               description="Alternative image for small or extra small devices" />
+        <field name="title"
+               type="text"
+               default=""
+               label="Image title"
+               description="The title of the image" />
+        <field name="article_id"
+               type="modal_article"
+               default=""
+               label="Select an article"
+               description="">
+            <option value="">JDEFAULT</option>
+        </field>
+        <field name="link"
+               type="url"
+               default=""
+               label="Image link"
+               description="The link of the image" />
+        <field name="target"
+               type="radio"
+               class="btn-group btn-group-yesno"
+               default="1"
+               label="Image link target"
+               description="Choose where the link points to">
+            <option value="1">Self</option>
+            <option value="0">Blank</option>
+        </field>
+        <field name="caption"
+               type="textarea"
+               label="Image caption"
+               description="The caption text for the image (html)" />
+    </fieldset>
+</form>

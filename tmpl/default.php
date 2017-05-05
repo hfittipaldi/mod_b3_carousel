@@ -6,13 +6,13 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2017 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
 // no direct access
-defined( '_JEXEC' ) or die;
+defined('_JEXEC') or die;
 
 if ($images !== null) :
 
@@ -38,27 +38,27 @@ if ($images !== null) :
         $styles = '';
         foreach ($images as $k => $image)
         {
-            if ($image['alternative_image'] !== '')
+            if ($image->alternative_image !== '')
             {
                 $styles .= '
     .item-' . $module_id . '-' . $k . ' {
-        background-image:url(' . JUri::base() . $image['alternative_image'] .');
+        background-image:url(' . JUri::base() . $image->alternative_image .');
     }';
             }
         ?>
 
         <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
-            <?php if ($image['link'] !== '') : ?>
-            <a href="<?php echo $image['link']; ?>"<?php echo $image['target']==1 ? ' target="_blank"' : ''; ?>>
-                <img src="<?php echo JUri::base() . $image['main_image']; ?>" alt="<?php echo $image['title']; ?>" />
+            <?php if ($image->link !== '') : ?>
+            <a href="<?php echo $image->link; ?>"<?php echo $image->target==1 ? ' target="_blank"' : ''; ?>>
+                <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
             </a>
             <?php else : ?>
-            <img src="<?php echo JUri::base() . $image['main_image']; ?>" alt="<?php echo $image['title']; ?>" />
+            <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
             <?php endif; ?>
 
-            <?php if ($image['description']) : ?>
+            <?php if ($image->caption) : ?>
             <figcaption class="carousel-caption">
-                <?php echo $image['description']; ?>
+                <?php echo $image->caption; ?>
             </figcaption>
             <?php endif; ?>
         </figure>
@@ -77,14 +77,15 @@ if ($images !== null) :
     </a>
     <?php endif; ?>
 
+</div>
+
     <?php if ($fluidContainer === 0) : ?>
     </div>
 </div>
     <?php endif; ?>
 
-</div>
+    <?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
 
-<?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
 <?php else : ?>
 <div class="alert alert-danger" role="alert">
     <h4 class="alert-heading">Erro</h4>

@@ -6,16 +6,16 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2017 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
 // no direct access
-defined( '_JEXEC' ) or die;
+defined('_JEXEC') or die;
 
-// Include the syndicate functions only once
-require_once __DIR__ . '/helper.php';
+// Register helper
+JLoader::register('modB3CarouselHelper', __DIR__ . '/helper.php');
 
 $doc = JFactory::getDocument();
 $doc->addStyleSheet(JURI::base() . '/media/mod_b3_carousel/css/b3_carousel.css');
@@ -44,6 +44,6 @@ $pause      = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
 $wrap       = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
 $keyboard   = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';
 
-$images     = modB3CarouselHelper::groupByKey($params->get('images'));
+$images     = modB3CarouselHelper::getCarousel($params->get('slides'));
 
 require JModuleHelper::getLayoutPath('mod_b3_carousel', $params->get('layout', 'default'));

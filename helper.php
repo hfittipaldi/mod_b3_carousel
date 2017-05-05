@@ -6,13 +6,13 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2016 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2017 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
 // no direct access
-defined( '_JEXEC' ) or die;
+defined('_JEXEC') or die;
 
 /**
  * Helper for mod_b3_carousel
@@ -24,80 +24,23 @@ defined( '_JEXEC' ) or die;
 class ModB3CarouselHelper
 {
     /**
-     * Group an object by key
+     * Get all slides from the carousel
      *
-     * @param   array  $json An object containing the item data
+     * @param  [[Type]] $slides [[Description]]
      *
-     * @access public
+     * @return array [[Description]]
      */
-    public static function groupByKey($json)
+    public static function getCarousel($slides)
     {
-        $imagesJSON = self::_getJSON($json);
-        if ($imagesJSON !== null)
+        $items = null;
+        foreach ($slides as $slide)
         {
-            $result = array();
-            foreach ($imagesJSON as $i => $sub)
+            if (!empty($slide->main_image))
             {
-                foreach ($sub as $k => $v)
-                {
-                    $result[$k][$i] = $v;
-                }
+                $items[] = $slide;
             }
-            $return = self::_columnsList($result);
-
-            if ($return !== null)
-                return $return;
         }
 
-        return null;
-    }
-
-    /**
-     * Retrieves the data in JSON format
-     *
-     * @param   array  $data An object containing the item data
-     *
-     * @access private
-     */
-    private static function _getJSON($data)
-    {
-        $result = json_decode($data, true);
-
-        if (version_compare(phpversion(), '5.6', '<'))
-        {
-            $result = call_user_func_array('json_decode', func_get_args());
-        }
-
-        if (json_last_error() === JSON_ERROR_NONE)
-            return $result;
-
-        return null;
-    }
-
-    /**
-     * Retrieves the list of columns
-     *
-     * @param   array  $data An object containing the item data
-     *
-     * @access private
-     */
-    private static function _columnsList($data)
-    {
-        foreach ($data as $key => $row)
-        {
-            $main_image[$key]        = $row['main_image'];
-            $alternative_image[$key] = $row['alternative_image'];
-            $title[$key]             = $row['title'];
-            $link[$key]              = $row['link'];
-            $target[$key]            = $row['target'];
-            $description[$key]       = $row['description'];
-            $ordering[$key]          = $row['ordering'];
-        }
-
-        // Ordena os dados com ordering ascendente, main_image ascendente
-        // adiciona $data como o último parãmetro, para ordenar pela chave comum
-        array_multisort($ordering, SORT_ASC, $main_image, SORT_ASC, $data);
-
-        return $data;
+        return $items;
     }
 }
