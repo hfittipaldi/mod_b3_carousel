@@ -41,8 +41,9 @@
             <option value="0">Blank</option>
         </field>
         <field name="caption"
-               type="textarea"
+               type="editor"
                label="Image caption"
-               description="The caption text for the image (html)" />
+               description="The caption text for the image (html)"
+               buttons="false" />
     </fieldset>
 </form>

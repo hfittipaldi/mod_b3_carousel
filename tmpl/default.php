@@ -16,12 +16,12 @@ defined('_JEXEC') or die;
 
 if ($images !== null) :
 
-    if ($fluidContainer === 0) : ?>
+    if ($full_width === 0) : ?>
 <div class="container">
     <div class="row">
     <?php endif; ?>
 
-<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition . $fluid; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition . $size; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -36,8 +36,7 @@ if ($images !== null) :
 
         <?php
         $styles = '';
-        foreach ($images as $k => $image)
-        {
+        foreach ($images as $k => $image) :
             if ($image->alternative_image !== '')
             {
                 $styles .= '
@@ -45,11 +44,12 @@ if ($images !== null) :
         background-image:url(' . JUri::base() . $image->alternative_image .');
     }';
             }
-        ?>
 
+            $link = modB3CarouselHelper::getUrl($image);
+        ?>
         <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
-            <?php if ($image->link !== '') : ?>
-            <a href="<?php echo $image->link; ?>"<?php echo $image->target==1 ? ' target="_blank"' : ''; ?>>
+            <?php if ($link !== '') : ?>
+            <a href="<?php echo $link; ?>"<?php echo $image->target==0 ? ' target="_blank"' : ''; ?>>
                 <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
             </a>
             <?php else : ?>
@@ -62,7 +62,7 @@ if ($images !== null) :
             </figcaption>
             <?php endif; ?>
         </figure>
-        <?php } ?>
+        <?php endforeach; ?>
     </div>
 
     <?php if ($controls === 1) : ?>
@@ -79,7 +79,7 @@ if ($images !== null) :
 
 </div>
 
-    <?php if ($fluidContainer === 0) : ?>
+    <?php if ($full_width === 0) : ?>
     </div>
 </div>
     <?php endif; ?>

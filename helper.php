@@ -26,11 +26,11 @@ class ModB3CarouselHelper
     /**
      * Get all slides from the carousel
      *
-     * @param  [[Type]] $slides [[Description]]
+     * @param  object $slides Collection of slides
      *
-     * @return array [[Description]]
+     * @return array Return an array of objects, discarted the empty ones
      */
-    public static function getCarousel($slides)
+    public function getCarousel($slides)
     {
         $items = null;
         foreach ($slides as $slide)
@@ -42,5 +42,28 @@ class ModB3CarouselHelper
         }
 
         return $items;
+    }
+
+    /**
+     * [[Description]]
+     *
+     * @param  object $image [[Description]]
+     *
+     * @return string [[Description]]
+     */
+    public function getUrl($image)
+    {
+        $article = JTable::getInstance('content');
+        $article->load($image->article_id);
+        $catid = $article->get('catid');
+
+        $link = $image->link;
+        if ($image->article_id !== '')
+        {
+            $route = ContentHelperRoute::getArticleRoute($image->article_id, $catid);
+            $link = JRoute::_($route);
+        }
+
+        return $link;
     }
 }

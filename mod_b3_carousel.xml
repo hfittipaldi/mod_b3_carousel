@@ -41,14 +41,14 @@
             </fieldset>
 
             <fieldset name="controls" label="Controls">
-                <field name="fluidContainer"
+                <field name="full_width"
                        type="radio"
                        class="btn-group btn-group-yesno radio"
                        default="1"
-                       label="Fluid Layout"
-                       description="Use Bootstrap's fluid or static container (both are responsive).">
-                    <option value="1">Fluid</option>
-                    <option value="0">Static</option>
+                       label="Full Width"
+                       description="Define if the carousel will be full page width or it'll be contained.">
+                    <option value="1">Full width</option>
+                    <option value="0">Contained</option>
                 </field>
                 <field name="autoslide"
                        type="radio"

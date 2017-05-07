@@ -25,12 +25,12 @@ $module_id = $module->id;
 
 /* Params */
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-$fluidContainer  = (int) $params->get('fluidContainer', 1);
-$fluid           = $fluidContainer === 1 ? '' : ' col-xs-12';
+$full_width = (int) $params->get('full_width', 1);
+$size       = $full_width === 1 ? '' : ' col-xs-12';
 
-$autoslide       = (int) $params->get('autoslide', 1);
-$interval        = (int) $params->get('interval', 5000);
-$transition      = (int) $params->get('transition', 0);
+$autoslide  = (int) $params->get('autoslide', 1);
+$interval   = (int) $params->get('interval', 5000);
+$transition = (int) $params->get('transition', 0);
 
 $transition = $transition !== 0 ? ' carousel-fade' : '';
 

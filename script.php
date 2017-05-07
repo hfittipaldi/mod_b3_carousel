@@ -11,7 +11,7 @@
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
 /**
@@ -26,139 +26,112 @@ defined('_JEXEC') or die;
  */
 class mod_b3_carouselInstallerScript
 {
-    private static $release;
-    private static $minimum_joomla_release;
-    private static $minimum_php_version = '5.6';
+    public $release;
+    public $min_joomla_release;
+    public $minimum_php_version = '5.6';
 
     /**
-     * Method to install the extension
-     * $parent is the class calling this method
+     * This method is called after a module is installed.
      *
      * @return void
      */
-    public static function install($parent)
+    public function install()
     {
         echo '<p>The module has been installed</p>';
     }
 
     /**
-     * Method to uninstall the extension
-     * $parent is the class calling this method
+     * This method is called after a module is uninstalled.
      *
      * @return void
      */
-    public static function uninstall($parent)
+    public function uninstall()
     {
         echo '<p>The module has been uninstalled</p>';
     }
 
     /**
-     * Method to update the extension
-     * $parent is the class calling this method
+     * This method is called after a module is updated.
+     *
+     * @param  \stdClass $parent - Parent object calling object.
      *
      * @return void
      */
-    public static function update($parent)
+    public function update($parent)
     {
-        // TODO: get all modules params and update them
-        // read the existing component value(s)
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select($db->quoteName(array('id', 'params')))
-            ->from($db->quoteName('#__modules'))
-            ->where($db->quoteName('module') . ' = ' . $db->quote('mod_b3_carousel'));
-        $db->setQuery($query);
-
-        $array = $db->loadAssocList();
-
-        // Select the required fields from the table.
-        $query = $db->getQuery(true);
-        $query = "UPDATE #__modules SET params = CASE id ";
-        foreach ($array as $value)
-        {
-            $params = json_decode($value['params']);
-            $query .= 'WHEN ' . $value['id'] . ' THEN \'' . self::_arrayToObject($params) . '\' ';
-            $ids[] = $value['id'];
-        }
-        $query .= 'END WHERE id IN (' . implode(',', $ids) . ')';
-
-        $db->setQuery((string)$query)
-            ->execute();
-
-        // TODO: update manifest_cache on #__extensions
-        self::setParams();
-
-        echo '<p>The module has been updated to version' . $parent->get('manifest')->version . '</p>';
+        echo '<p>The module has been updated to version ' . $parent->get('manifest')->version . '</p>';
     }
 
     /**
-     * Method to run before an install/update/uninstall method
+     * Runs just before any installation action is preformed on the component.
+     * Verifications and pre-requisites should run in this function.
      *
-     * @param class $parent is the class calling this method
-     * @param string $type is the type of change (install, update or discover_install)
+     * @param  string    $type   - Type of PreFlight action. Possible values are:
+     *                           - * install
+     *                           - * update
+     *                           - * discover_install
+     * @param  \stdClass $parent - Parent object calling object.
      *
      * @return void
      */
-    public static function preflight($type, $parent)
+    public function preflight($type, $parent)
     {
+        $app = JFactory::getApplication();
+
         $jversion = new JVersion();
 
         // Installing component manifest file version
-        self::$release = $parent->get("manifest")->version;
+        $this->release = $parent->get("manifest")->version;
 
         // Manifest file minimum Joomla version
-        self::$minimum_joomla_release = $parent->get("manifest")->attributes()->version;
+        $this->minimum_joomla_release = $parent->get("manifest")->attributes()->version;
 
         // Show the essential information at the install/update back-end
-        echo '<p>Installing module manifest file version = ' . self::$release;
+        echo '<p>Installing module manifest file version = ' . $this->release;
         echo '<br />Current manifest cache module version = ' . self::getParam('version');
-        echo '<br />Installing component manifest file minimum Joomla version = ' . self::$minimum_joomla_release;
+        echo '<br />Installing component manifest file minimum Joomla version = ' . $this->minimum_joomla_release;
         echo '<br />Current Joomla version = ' . $jversion->getShortVersion();
-        echo '<br />Minimum PHP required version = ' . self::$minimum_php_version;
+        echo '<br />Minimum PHP required version = ' . $this->minimum_php_version;
         echo '<br />Current PHP version = ' . phpversion() . '</p>';
 
-        // abort if the current Joomla release is older
-        if (version_compare($jversion->getShortVersion(), self::$minimum_joomla_release, 'lt'))
+        // Abort if the current Joomla release is older
+        if (version_compare($jversion->getShortVersion(), $this->minimum_joomla_release, 'lt'))
         {
-            Jerror::raiseWarning(null, 'Cannot install B3 Carousel Module in a Joomla release prior to ' . self::$minimum_joomla_release);
+            $app->enqueueMessage('Cannot install B3 Carousel Module in a Joomla release prior to ' . $this->minimum_joomla_release, 'warning');
             return false;
         }
 
-        // abort if the PHP version is not newer than the minimum PHP required version
-        if (version_compare(phpversion(), self::$minimum_php_version, 'lt'))
+        // Abort if the PHP version is not newer than the minimum PHP required version
+        if (version_compare(phpversion(), $this->minimum_php_version, 'lt'))
         {
-            Jerror::raiseWarning(null, 'Cannot install B3 Carousel Module in a PHP version prior to ' . self::$minimum_php_version);
+            $app->enqueueMessage('Cannot install B3 Carousel Module in a PHP version prior to ' . $this->minimum_php_version, 'warning');
             return false;
         }
 
-        $message = $type == 'install' ? 'installed' : 'uninstalled';
-
-        // abort if the module being installed is not newer than the currently installed version
+        // Abort if the module being installed is not newer than the currently installed version
         if ($type == 'update')
         {
             $oldRelease = self::getParam('version');
-            $rel = $oldRelease . ' to ' . self::$release;
-            if (version_compare(self::$release, $oldRelease, 'le'))
+            $rel = $oldRelease . ' to ' . $this->release;
+            if (version_compare($this->release, $oldRelease, 'le'))
             {
-                Jerror::raiseWarning(null, 'Incorrect version sequence. Cannot upgrade ' . $rel);
+                $app->enqueueMessage('Incorrect version sequence. Cannot upgrade ' . $rel, 'warning');
                 return false;
             }
 
-            $message = 'updated from ' . $rel;
+            if (version_compare($oldRelease, '2.0', 'lt'))
+            {
+                self::migrateData();
+            }
         }
-
-        echo '<p>' . JText::_('B3 Carousel Module was succefully ' . $message . '.') . '</p>';
     }
 
     /**
-     * Method to run after an install/update/uninstall method
-     *
-     * @param class $parent is the class calling this method
-     * @param string $type is the type of change (install, update or discover_install)
+     * Runs right after any installation action is preformed on the component.
      *
      * @return void
      */
-    public static function postflight($type, $parent)
+    public function postflight()
     {
     }
 
@@ -169,7 +142,7 @@ class mod_b3_carouselInstallerScript
      *
      * @return string [[Description]]
      */
-    public static function getParam($name)
+    public function getParam($name)
     {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -187,19 +160,48 @@ class mod_b3_carouselInstallerScript
      *
      * @return void
      */
-    public static function setParams()
+    public function updateManifestCache()
     {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->update($db->quoteName('#__extensions'))
-            ->set($db->quoteName('params') . ' = ' . $db->quote('{"slides":"{"main_image":"","alternative_image":"","title":"","link":"","target":"0","caption":""}","fluidContainer":"1","autoslide":"1","transition":"0","interval":"5000","indicators":"1","controls":"1","pause":"1","wrap":"1","keyboard":"1","cache":"1","cache_time":"900","cachemode":"static"}'))
+            ->set($db->quoteName('params') . ' = ' . $db->quote('{"slides":"{"main_image":"","alternative_image":"","title":"","link":"","target":"0","caption":""}","full_width":"1","autoslide":"1","transition":"0","interval":"5000","indicators":"1","controls":"1","pause":"1","wrap":"1","keyboard":"1","cache":"1","cache_time":"900","cachemode":"static"}'))
             ->where($db->quoteName('element') . ' = ' . $db->quote('mod_b3_carousel'));
 
         $db->setQuery($query)
             ->execute();
     }
 
-    private static function _arrayToObject($params)
+    public function migrateData()
+    {
+        // Read the existing component value(s)
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select($db->quoteName(array('id', 'params')))
+            ->from($db->quoteName('#__modules'))
+            ->where($db->quoteName('module') . ' = ' . $db->quote('mod_b3_carousel'));
+        $db->setQuery($query);
+
+        $array = $db->loadAssocList();
+
+        // Select the required fields from the table.
+        $query = $db->getQuery(true);
+        $query = "UPDATE #__modules SET params = CASE id ";
+        foreach ($array as $value)
+        {
+            $params = json_decode($value['params']);
+            $query .= 'WHEN ' . $value['id'] . ' THEN ' . $db->quote(self::_arrayToObject($params)) . ' ';
+            $ids[] = $value['id'];
+        }
+        $query .= 'END WHERE id IN (' . implode(',', $ids) . ')';
+
+        $db->setQuery($query)
+            ->execute();
+
+        self::updateManifestCache();
+    }
+
+    protected function _arrayToObject($params)
     {
         $array = self::_groupByKey($params->images);
 
@@ -214,12 +216,10 @@ class mod_b3_carouselInstallerScript
                         $property = 'caption';
                     }
 
-/*
-                    if (!in_array($property, array('main_image', 'alternative_image', 'link')))
+                    if ($property == 'target')
                     {
-                        $argument = str_replace('/', '\/', $argument);
+                        $argument = $argument == 0 ? 1 : 0;
                     }
-*/
 
                     $result['slides']['slides' . $key][$property] = $argument;
                 }
@@ -228,7 +228,7 @@ class mod_b3_carouselInstallerScript
             $result['slides']['slides' . $key]['article_id'] = '';
         }
 
-        $result['fluidContainer']   = $params->fluidContainer;
+        $result['full_width']       = $params->fluidContainer;
         $result['autoslide']        = $params->autoslide;
         $result['transition']       = $params->transition;
         $result['interval']         = $params->interval;
@@ -258,7 +258,7 @@ class mod_b3_carouselInstallerScript
      *
      * @access public
      */
-    private static function _groupByKey($json)
+    protected function _groupByKey($json)
     {
         $return = null;
 
@@ -283,9 +283,9 @@ class mod_b3_carouselInstallerScript
      *
      * @param   array  $data An object containing the item data
      *
-     * @access private
+     * @access protected
      */
-    private static function _columnsList($data)
+    protected function _columnsList($data)
     {
         foreach ($data as $key => $row)
         {
@@ -294,7 +294,7 @@ class mod_b3_carouselInstallerScript
         }
 
         // Ordena os dados com ordering ascendente, main_image ascendente
-        // adiciona $data como o último parãmetro, para ordenar pela chave comum
+        // Adiciona $data como o último parâmetro, para ordenar pela chave comum
         array_multisort($ordering, SORT_ASC, $main_image, SORT_ASC, $data);
 
         return $data;
