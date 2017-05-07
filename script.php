@@ -179,7 +179,8 @@ class mod_b3_carouselInstallerScript
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('id', 'params')))
             ->from($db->quoteName('#__modules'))
-            ->where($db->quoteName('module') . ' = ' . $db->quote('mod_b3_carousel'));
+            ->where($db->quoteName('module') . ' = ' . $db->quote('mod_b3_carousel'))
+            ->where($db->quoteName('published') . ' = 1');
         $db->setQuery($query);
 
         $array = $db->loadAssocList();
