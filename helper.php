@@ -30,7 +30,7 @@ class ModB3CarouselHelper
      *
      * @return array Return an array of objects, discarted the empty ones
      */
-    public function getCarousel($slides)
+    public static function getCarousel($slides)
     {
         $items = null;
         foreach ($slides as $slide)
@@ -51,7 +51,7 @@ class ModB3CarouselHelper
      *
      * @return string [[Description]]
      */
-    public function getUrl($image)
+    public static function getUrl($image)
     {
         $article = JTable::getInstance('content');
         $article->load($image->article_id);
