@@ -10,6 +10,10 @@ html, body,
 .b3Carousel.carousel-fade .carousel-control {
     z-index: 2;
 }
+.b3Carousel .carousel-inner .item {
+    margin: 0;
+    max-width: 100%;
+}
 .b3Carousel .carousel-inner .item img {
     width: 100%;
 }
