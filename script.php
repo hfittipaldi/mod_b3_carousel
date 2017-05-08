@@ -229,7 +229,7 @@ class mod_b3_carouselInstallerScript
             $result['slides']['slides' . $key]['article_id'] = '';
         }
 
-        $result['full_width']       = $params->fluidContainer;
+        $result['full_width']       = &$params->fluidContainer;
         $result['autoslide']        = $params->autoslide;
         $result['transition']       = $params->transition;
         $result['interval']         = $params->interval;
