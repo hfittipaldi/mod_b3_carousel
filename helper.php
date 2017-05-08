@@ -57,13 +57,12 @@ class ModB3CarouselHelper
         $article->load($image->article_id);
         $catid = $article->get('catid');
 
-        $link = $image->link;
+        $route = $image->link;
         if ($image->article_id !== '')
         {
             $route = ContentHelperRoute::getArticleRoute($image->article_id, $catid);
-            $link = JRoute::_($route);
         }
 
-        return $link;
+        return $route;
     }
 }

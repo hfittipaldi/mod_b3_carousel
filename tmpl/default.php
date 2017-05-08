@@ -49,7 +49,7 @@ if ($images !== null) :
         ?>
         <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
             <?php if ($link !== '') : ?>
-            <a href="<?php echo $link; ?>"<?php echo $image->target==0 ? ' target="_blank"' : ''; ?>>
+            <a href="<?php echo JRoute::_($link); ?>"<?php echo $image->target==0 ? ' target="_blank"' : ''; ?>>
                 <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
             </a>
             <?php else : ?>
