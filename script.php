@@ -185,19 +185,22 @@ class mod_b3_carouselInstallerScript
 
         $array = $db->loadAssocList();
 
-        // Select the required fields from the table.
-        $query = $db->getQuery(true);
-        $query = "UPDATE #__modules SET params = CASE id ";
-        foreach ($array as $value)
+        if (count($array) > 0)
         {
-            $params = json_decode($value['params']);
-            $query .= 'WHEN ' . $value['id'] . ' THEN ' . $db->quote(self::_arrayToObject($params)) . ' ';
-            $ids[] = $value['id'];
-        }
-        $query .= 'END WHERE id IN (' . implode(',', $ids) . ')';
+            // Select the required fields from the table.
+            $query = $db->getQuery(true);
+            $query = "UPDATE #__modules SET params = CASE id ";
+            foreach ($array as $value)
+            {
+                $params = json_decode($value['params']);
+                $query .= 'WHEN ' . $value['id'] . ' THEN ' . $db->quote(self::_arrayToObject($params)) . ' ';
+                $ids[] = $value['id'];
+            }
+            $query .= 'END WHERE id IN (' . implode(',', $ids) . ')';
 
-        $db->setQuery($query)
-            ->execute();
+            $db->setQuery($query)
+                ->execute();
+        }
 
         self::updateManifestCache();
     }
