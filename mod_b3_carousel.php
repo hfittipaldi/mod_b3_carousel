@@ -44,6 +44,6 @@ $pause      = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
 $wrap       = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
 $keyboard   = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';
 
-$images     = modB3CarouselHelper::getCarousel($params->get('slides'));
+$images     = $params->get('slides');
 
 require JModuleHelper::getLayoutPath('mod_b3_carousel', $params->get('layout', 'default'));

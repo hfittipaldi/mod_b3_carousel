@@ -24,27 +24,6 @@ defined('_JEXEC') or die;
 class ModB3CarouselHelper
 {
     /**
-     * Get all slides from the carousel
-     *
-     * @param  object $slides Collection of slides
-     *
-     * @return array Return an array of objects, discarted the empty ones
-     */
-    public static function getCarousel($slides)
-    {
-        $items = null;
-        foreach ($slides as $slide)
-        {
-            if (!empty($slide->main_image))
-            {
-                $items[] = $slide;
-            }
-        }
-
-        return $items;
-    }
-
-    /**
      * [[Description]]
      *
      * @param  object $image [[Description]]

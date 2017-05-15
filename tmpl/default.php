@@ -36,7 +36,8 @@ if ($images !== null) :
 
         <?php
         $styles = '';
-        foreach ($images as $k => $image) :
+        $k = 0;
+        foreach ($images as $image) :
             if ($image->alternative_image !== '')
             {
                 $styles .= '
@@ -62,7 +63,8 @@ if ($images !== null) :
             </figcaption>
             <?php endif; ?>
         </figure>
-        <?php endforeach; ?>
+        <?php ++$k;
+        endforeach; ?>
     </div>
 
     <?php if ($controls === 1) : ?>
