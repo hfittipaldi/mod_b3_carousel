@@ -25,9 +25,12 @@ if ($images !== null) :
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <?php foreach ($images as $k => $image) : ?>
+        <?php
+        $k = 0;
+        foreach ($images as $image) : ?>
         <li data-target="#b3Carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
-        <?php endforeach; ?>
+        <?php ++$k;
+        endforeach; ?>
     </ol>
     <?php endif; ?>
 
@@ -93,5 +96,4 @@ if ($images !== null) :
     <h4 class="alert-heading">Erro</h4>
     <div class="alert-message">Não existe nehuma imagem cadastrada.</div>
 </div>
-
 <?php endif; ?>
