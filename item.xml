@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-    <fieldset name="image">
+    <fieldset name="section1" class="span4 form-vertical">
         <field name="main_image"
                type="media"
                required="true"
@@ -40,10 +40,14 @@
             <option value="1">Self</option>
             <option value="0">Blank</option>
         </field>
+    </fieldset>
+
+    <fieldset name="section2" class="span8 form-vertical">
         <field name="caption"
                type="editor"
                label="Image caption"
                description="The caption text for the image (html)"
+               height="250"
                buttons="false" />
     </fieldset>
 </form>
