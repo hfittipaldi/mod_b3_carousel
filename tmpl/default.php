@@ -18,10 +18,9 @@ if ($images !== null) :
 
     if ($full_width === 0) : ?>
 <div class="container">
-    <div class="row">
     <?php endif; ?>
 
-<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition . $size; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -85,7 +84,6 @@ if ($images !== null) :
 </div>
 
     <?php if ($full_width === 0) : ?>
-    </div>
 </div>
     <?php endif; ?>
 

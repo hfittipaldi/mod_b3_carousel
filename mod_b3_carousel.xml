@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
     <authorUrl>https://github.com/hfittipaldi</authorUrl>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <description>Bootstrap 3 Carousel Module is a module for Joomla 3.6+ which displays a carousel of images.</description>
     <scriptfile>script.php</scriptfile>
 
@@ -22,6 +22,7 @@
 
     <media folder="media" destination="mod_b3_carousel">
         <folder>css</folder>
+        <folder>js</folder>
     </media>
 
     <config>
@@ -130,7 +131,7 @@
                        description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
                 <field name="cache"
                        type="list"
-                       default="1"
+                       default="0"
                        label="COM_MODULES_FIELD_CACHING_LABEL"
                        description="COM_MODULES_FIELD_CACHING_DESC">
                     <option value="1">JGLOBAL_USE_GLOBAL</option>

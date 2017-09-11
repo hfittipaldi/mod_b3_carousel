@@ -18,7 +18,10 @@ defined('_JEXEC') or die;
 JLoader::register('modB3CarouselHelper', __DIR__ . '/helper.php');
 
 $doc = JFactory::getDocument();
-$doc->addStyleSheet(JURI::base() . '/media/mod_b3_carousel/css/b3_carousel.css');
+
+JHtml::_('stylesheet', 'mod_b3_carousel/b3_carousel.css', ['relative' => true]);
+JHtml::_('script', 'mod_b3_carousel/jquery.mobile.touch.min.js', ['relative' => true]);
+JHtml::_('script', 'mod_b3_carousel/b3_carousel.js', ['relative' => true]);
 
 /* Module id */
 $module_id = $module->id;
@@ -26,23 +29,18 @@ $module_id = $module->id;
 /* Params */
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 $full_width = (int) $params->get('full_width', 1);
-$size       = $full_width === 1 ? '' : ' col-xs-12';
+$transition = (int) $params->get('transition') !== 0 ? ' carousel-fade' : '';
 
-$autoslide  = (int) $params->get('autoslide', 1);
 $interval   = (int) $params->get('interval', 5000);
-$transition = (int) $params->get('transition', 0);
-
-$transition = $transition !== 0 ? ' carousel-fade' : '';
-
 $interval   = $interval !== 5000 ? ' data-interval="' . $interval . '"' : '';
-$interval   = $autoslide !== 0 ? $interval : ' data-interval="false"';
+$interval   = $params->def('autoslide', 1) ? $interval : ' data-interval="false"';
 
 $indicators = (int) $params->get('indicators', 1);
 $controls   = (int) $params->get('controls', 1);
 
-$pause      = (int) $params->get('pause') !== 1 ? ' data-pause="false"' : '';
-$wrap       = (int) $params->get('wrap') !== 1 ? ' data-wrap="false"' : '';
-$keyboard   = (int) $params->get('keyboard') !== 1 ? ' data-keyboard="false"' : '';
+$pause      = !$params->def('pause', 1) ? ' data-pause="false"' : '';
+$wrap       = !$params->def('wrap', 1) ? ' data-wrap="false"' : '';
+$keyboard   = !$params->def('keyboard', 1) ? ' data-keyboard="false"' : '';
 
 $images     = $params->get('slides');
 

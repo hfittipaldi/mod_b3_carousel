@@ -7,9 +7,6 @@ html, body,
 .b3Carousel {
     margin-bottom: 20px;
 }
-.b3Carousel.carousel-fade .carousel-control {
-    z-index: 2;
-}
 .b3Carousel .carousel-inner .item {
     margin: 0;
     max-width: 100%;
@@ -17,31 +14,29 @@ html, body,
 .b3Carousel .carousel-inner .item img {
     width: 100%;
 }
-.b3Carousel.carousel-fade .carousel-inner .item {
-    -webkit-transition-property: opacity;
-            transition-property: opacity;
-}
-.b3Carousel.carousel-fade .carousel-inner .item,
-.b3Carousel.carousel-fade .carousel-inner .active.left,
-.b3Carousel.carousel-fade .carousel-inner .active.right {
-    opacity: 0;
-}
-.b3Carousel.carousel-fade .carousel-inner .active,
-.b3Carousel.carousel-fade .carousel-inner .next.left,
-.b3Carousel.carousel-fade .carousel-inner .prev.right {
-    opacity: 1;
-}
-.b3Carousel.carousel-fade .carousel-inner .next,
-.b3Carousel.carousel-fade .carousel-inner .prev,
-.b3Carousel.carousel-fade .carousel-inner .active.left,
-.b3Carousel.carousel-fade .carousel-inner .active.right {
-    left: 0;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-}
-.container .b3Carousel .carousel-control.left {
-    left: 15px;
-}
-.container .b3Carousel .carousel-control.right {
-    right: 15px;
+@media (min-width: 768px) {
+    .b3Carousel.carousel-fade .carousel-control {
+        z-index: 2;
+    }
+    .b3Carousel.carousel-fade .carousel-inner .item {
+        -webkit-transition-property: opacity;
+                transition-property: opacity;
+    }
+    .b3Carousel.carousel-fade .carousel-inner .item,
+    .b3Carousel.carousel-fade .carousel-inner .active.left,
+    .b3Carousel.carousel-fade .carousel-inner .active.right {
+        opacity: 0;
+    }
+    .b3Carousel.carousel-fade .carousel-inner .active,
+    .b3Carousel.carousel-fade .carousel-inner .next.left,
+    .b3Carousel.carousel-fade .carousel-inner .prev.right {
+        opacity: 1;
+    }
+    .b3Carousel.carousel-fade .carousel-inner .next,
+    .b3Carousel.carousel-fade .carousel-inner .prev,
+    .b3Carousel.carousel-fade .carousel-inner .active.left,
+    .b3Carousel.carousel-fade .carousel-inner .active.right {
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+    }
 }
