@@ -1,11 +1,7 @@
-html, body,
 .b3Carousel.carousel,
 .b3Carousel .carousel-inner,
 .b3Carousel .carousel-inner .item {
     height: 100%;
-}
-.b3Carousel {
-    margin-bottom: 20px;
 }
 .b3Carousel .carousel-inner .item {
     margin: 0;

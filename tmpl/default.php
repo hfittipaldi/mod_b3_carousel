@@ -6,7 +6,7 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2017 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2018 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
@@ -14,11 +14,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-if ($images !== null) :
-
-    if ($full_width === 0) : ?>
-<div class="container">
-    <?php endif; ?>
+if ($images !== null) : ?>
 
 <div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
@@ -39,7 +35,8 @@ if ($images !== null) :
         <?php
         $styles = '';
         $k = 0;
-        foreach ($images as $image) :
+        foreach ($images as $image)
+        {
             if ($image->alternative_image !== '')
             {
                 $styles .= '
@@ -48,15 +45,22 @@ if ($images !== null) :
     }';
             }
 
+            $alt = $image->title;
+            if ($alt === '')
+            {
+                $parts = explode('/', $image->main_image);
+                $alt = array_pop($parts);
+            }
+
             $link = modB3CarouselHelper::getUrl($image);
         ?>
         <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
             <?php if ($link !== '') : ?>
             <a href="<?php echo JRoute::_($link); ?>"<?php echo $image->target==0 ? ' target="_blank"' : ''; ?>>
-                <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
+                <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $alt; ?>" />
             </a>
             <?php else : ?>
-            <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $image->title; ?>" />
+            <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $alt; ?>" />
             <?php endif; ?>
 
             <?php if ($image->caption) : ?>
@@ -66,7 +70,7 @@ if ($images !== null) :
             <?php endif; ?>
         </figure>
         <?php ++$k;
-        endforeach; ?>
+        } ?>
     </div>
 
     <?php if ($controls === 1) : ?>
@@ -83,15 +87,10 @@ if ($images !== null) :
 
 </div>
 
-    <?php if ($full_width === 0) : ?>
-</div>
-    <?php endif; ?>
-
     <?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
 
 <?php else : ?>
-<div class="alert alert-danger" role="alert">
-    <h4 class="alert-heading">Erro</h4>
-    <div class="alert-message">Não existe nehuma imagem cadastrada.</div>
+<div class="alert alert-warning" role="alert">
+    <strong>Atenção: </strong>Não existe nehuma imagem cadastrada.
 </div>
 <?php endif; ?>

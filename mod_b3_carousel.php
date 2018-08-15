@@ -6,7 +6,7 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2017 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2018 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
@@ -28,7 +28,6 @@ $module_id = $module->id;
 
 /* Params */
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
-$full_width = (int) $params->get('full_width', 1);
 $transition = (int) $params->get('transition') !== 0 ? ' carousel-fade' : '';
 
 $interval   = (int) $params->get('interval', 5000);
