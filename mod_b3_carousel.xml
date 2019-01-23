@@ -3,12 +3,12 @@
     <name>B3 Carousel Module</name>
     <author>Hugo Fittipaldi</author>
     <creationDate>April 2016</creationDate>
-    <copyright>Copyright (C) 2018 Hugo Fittipaldi. All rights reserved.</copyright>
+    <copyright>Copyright (C) 2019 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
     <authorUrl>https://github.com/hfittipaldi</authorUrl>
-    <version>2.1.1</version>
-    <description>Bootstrap 3 Carousel Module is a module for Joomla 3.6+ which displays a carousel of images.</description>
+    <version>2.2</version>
+    <description>B3 Carousel Module is a module for Joomla 3.6+ which displays a carousel of images.</description>
     <scriptfile>script.php</scriptfile>
 
     <files>
@@ -28,6 +28,14 @@
     <config>
         <fields name="params">
             <fieldset name="basic" addfieldpath="/administrator/components/com_content/models/fields">
+                <field name="version"
+                       type="list"
+                       default="4.x"
+                       label="Bootstrap"
+                       description="Bootstrap version.">
+                    <option value="4.x">4.x</option>
+                    <option value="3.x">3.x</option>
+                </field>
                 <field name="slides"
                        type="subform"
                        formsource="modules/mod_b3_carousel/item.xml"
@@ -42,15 +50,6 @@
             </fieldset>
 
             <fieldset name="controls" label="Controls">
-                <field name="full_width"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Full Width"
-                       description="Define if the carousel will be full page width or it'll be contained.">
-                    <option value="1">Full width</option>
-                    <option value="0">Contained</option>
-                </field>
                 <field name="autoslide"
                        type="radio"
                        class="btn-group btn-group-yesno radio"

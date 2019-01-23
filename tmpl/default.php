@@ -6,7 +6,7 @@
  * @subpackage  mod_b3_carousel
  *
  * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
- * @copyright   Copyright (C) 2018 Hugo Fittipaldi. All rights reserved.
+ * @copyright   Copyright (C) 2019 Hugo Fittipaldi. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
@@ -14,16 +14,18 @@
 // no direct access
 defined('_JEXEC') or die;
 
-if ($images !== null) : ?>
+if ($images !== null) { ?>
 
-<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>" data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
+<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>"
+     data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
     <?php if ($indicators === 1) : ?>
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <?php
         $k = 0;
         foreach ($images as $image) : ?>
-        <li data-target="#b3Carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"<?php echo $k==0 ? ' class="active"': ''; ?>></li>
+        <li data-target="#b3Carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"
+            <?php echo $k==0 ? ' class="active"': ''; ?>></li>
         <?php ++$k;
         endforeach; ?>
     </ol>
@@ -35,26 +37,23 @@ if ($images !== null) : ?>
         <?php
         $styles = '';
         $k = 0;
-        foreach ($images as $image)
-        {
-            if ($image->alternative_image !== '')
-            {
+        foreach ($images as $image) {
+            if ($image->alternative_image !== '') {
                 $styles .= '
     .item-' . $module_id . '-' . $k . ' {
-        background-image:url(' . JUri::base() . $image->alternative_image .');
+        background-image:url(' . JUri::base() . $image->alternative_image . ');
     }';
             }
 
             $alt = $image->title;
-            if ($alt === '')
-            {
+            if ($alt === '') {
                 $parts = explode('/', $image->main_image);
                 $alt = array_pop($parts);
             }
 
             $link = modB3CarouselHelper::getUrl($image);
         ?>
-        <figure class="item-<?php echo $module_id . '-' . $k; ?> item<?php echo $k==0 ? ' active' : ''; ?>">
+        <figure class="<?php echo $item; ?>item item-<?php echo $module_id . '-' . $k . ($k==0 ? ' active' : ''); ?>">
             <?php if ($link !== '') : ?>
             <a href="<?php echo JRoute::_($link); ?>"<?php echo $image->target==0 ? ' target="_blank"' : ''; ?>>
                 <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $alt; ?>" />
@@ -75,22 +74,24 @@ if ($images !== null) : ?>
 
     <?php if ($controls === 1) : ?>
     <!-- Controls -->
-    <a class="left carousel-control" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <a class="<?php echo $ctrlPrev; ?>" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="prev">
+        <span class="<?php echo $spanPrev; ?>" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <a class="<?php echo $ctrlNext; ?>" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="next">
+        <span class="<?php echo $spanNext; ?>" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
     <?php endif; ?>
 
 </div>
 
-    <?php if ($styles !== '') $doc->addStyleDeclaration($styles); ?>
-
-<?php else : ?>
+<?php
+    if ($styles !== '') {
+        $doc->addStyleDeclaration($styles);
+    }
+} else { ?>
 <div class="alert alert-warning" role="alert">
     <strong>Atenção: </strong>Não existe nehuma imagem cadastrada.
 </div>
-<?php endif; ?>
+<?php } ?>
