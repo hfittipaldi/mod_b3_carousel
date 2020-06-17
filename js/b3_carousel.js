@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global $, jQuery*/
+/*global document, jQuery*/
 jQuery(document).ready(function ($) {
     'use strict';
     $('.b3Carousel').swiperight(function () {
