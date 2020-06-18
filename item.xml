@@ -48,6 +48,7 @@
                label="Image caption"
                description="The caption text for the image (html)"
                height="250"
-               buttons="false" />
+               buttons="false"
+               filter="safehtml" />
     </fieldset>
 </form>
