@@ -21,6 +21,7 @@ JHtml::_('script', 'mod_b3_carousel/jquery.mobile.touch.min.js', ['relative' => 
 JHtml::_('script', 'mod_b3_carousel/b3_carousel.js', ['relative' => true]);
 
 $doc = JFactory::getDocument();
+$now = JFactory::getDate();
 
 /* Module id */
 $module_id = $module->id;

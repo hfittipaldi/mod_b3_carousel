@@ -40,6 +40,26 @@
             <option value="1">Self</option>
             <option value="0">Blank</option>
         </field>
+        <field name="publish_start"
+               type="calendar"
+               default="0000-00-00 00:00:00"
+               label="Start Publishing"
+               description=""
+               filter="user_utc"
+               showtime="true"
+               todaybutton="true"
+               filltable="false"
+               translateformat="true" />
+        <field name="publish_end"
+               type="calendar"
+               default="0000-00-00 00:00:00"
+               label="Finish Publishing"
+               description=""
+               filter="user_utc"
+               showtime="true"
+               todaybutton="true"
+               filltable="false"
+               translateformat="true" />
     </fieldset>
 
     <fieldset name="section2" class="span8 form-vertical">
