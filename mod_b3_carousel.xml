@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
     <authorUrl>https://github.com/hfittipaldi/mod_b3_carousel</authorUrl>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <description>MOD_B3_CAROUSEL_XML_DESCRIPTION</description>
     <namespace path="src">Joomla\Module\B3Carousel</namespace>
     <files>
