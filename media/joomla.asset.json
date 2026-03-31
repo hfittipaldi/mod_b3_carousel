@@ -1,0 +1,27 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "mod_b3_carousel",
+    "version": "1.0.0",
+    "description": "B3 Carousel Module",
+    "license": "GPL-2.0-or-later",
+    "assets": [
+      {
+        "name": "mod_b3_carousel.carousel",
+        "type": "script",
+        "uri": "mod_b3_carousel/b3_carousel.js",
+        "dependencies": [
+          "jquery"
+        ],
+        "attributes": {
+          "type": "module"
+        },
+        "version": "1.0.0"
+      },
+      {
+        "name": "mod_b3_carousel.carousel",
+        "type": "style",
+        "uri": "mod_b3_carousel/b3_carousel.min.css",
+        "version": "1.0.0"
+      }
+    ]
+  }

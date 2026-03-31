@@ -1,148 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
-    <name>B3 Carousel Module</name>
+<extension type="module" version="4.0" client="site" method="upgrade">
+    <name>MOD_B3_CAROUSEL</name>
     <author>Hugo Fittipaldi</author>
     <creationDate>April 2016</creationDate>
     <copyright>Copyright (C) 2020 Hugo Fittipaldi. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>hugo.fittipaldi@gmail.com</authorEmail>
-    <authorUrl>https://github.com/hfittipaldi</authorUrl>
-    <version>2.3</version>
-    <description>B3 Carousel Module is a module for Joomla 3.6+ which displays a carousel of images.</description>
-    <scriptfile>script.php</scriptfile>
-
+    <authorUrl>https://github.com/hfittipaldi/mod_b3_carousel</authorUrl>
+    <version>3.0.0</version>
+    <description>MOD_B3_CAROUSEL_XML_DESCRIPTION</description>
+    <namespace path="src">Joomla\Module\B3Carousel</namespace>
     <files>
-        <filename>mod_b3_carousel.xml</filename>
-        <filename module="mod_b3_carousel">mod_b3_carousel.php</filename>
-        <filename>helper.php</filename>
-        <filename>item.xml</filename>
+        <folder module="mod_b3_carousel">services</folder>
+        <folder>src</folder>
         <folder>tmpl</folder>
+        <filename>item.xml</filename>
     </files>
-
-    <media folder="media" destination="mod_b3_carousel">
+    <scriptfile>script.php</scriptfile>
+    <media destination="mod_b3_carousel" folder="media">
+        <filename>joomla.asset.json</filename>
         <folder>css</folder>
         <folder>js</folder>
     </media>
-
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_b3_carousel.ini</language>
+        <language tag="en-GB">language/en-GB/mod_b3_carousel.sys.ini</language>
+    </languages>
     <config>
         <fields name="params">
             <fieldset name="basic" addfieldpath="/administrator/components/com_content/models/fields">
-                <field name="version"
-                       type="list"
-                       default="3.x"
-                       label="Bootstrap"
-                       description="Bootstrap version.">
-                    <option value="4.x">4.x</option>
-                    <option value="3.x">3.x</option>
-                </field>
-                <field name="slides"
-                       type="subform"
-                       formsource="modules/mod_b3_carousel/item.xml"
-                       class="advancedSelect"
-                       min="1"
-                       max="10"
-                       multiple="true"
-                       layout="joomla.form.field.subform.repeatable"
-                       groupByFieldset="true"
-                       label="Carousel Images"
-                       description="Subform Field Description" />
+                <field
+                    name="slides"
+                    type="subform"
+                    formsource="modules/mod_b3_carousel/item.xml"
+                    class="advancedSelect"
+                    min="1"
+                    max="10"
+                    multiple="true"
+                    layout="joomla.form.field.subform.repeatable"
+                    groupByFieldset="true"
+                    label="MOD_B3_CAROUSEL_FIELD_SLIDES_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_SLIDES_DESC"
+                    filter="integer"
+                />
             </fieldset>
 
             <fieldset name="controls" label="Controls">
-                <field name="autoslide"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Auto slide"
-                       description="If no, carousel will not automatically cycle.">
-                    <option value="1">JYES</option>
+                <field
+                    name="autoslide"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_AUTOSLIDE_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_AUTOSLIDE_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
-                <field name="transition"
-                       type="list"
-                       default="0"
-                       label="Transition"
-                       description="Image transition">
+
+                <field
+                    name="transition"
+                    type="list"
+                    default="0"
+                    label="MOD_B3_CAROUSEL_FIELD_TRANSITION_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_TRANSITION_DESC"
+                    filter="integer"
+                >
                     <option value="0">Default</option>
                     <option value="1">Fade</option>
                 </field>
-                <field name="interval"
-                       type="text"
-                       default="5000"
-                       label="Interval"
-                       description="The amount of time to delay between automatically cycling an item." />
-                <field name="indicators"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Indicators"
-                       description="Turn on or off underside control blobs.">
-                    <option value="1">JYES</option>
+
+                <field
+                    name="interval"
+                    type="text"
+                    default="5000"
+                    label="MOD_B3_CAROUSEL_FIELD_INTERVAL_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_INTERVAL_DESC"
+                    filter="integer"
+                />
+
+                <field
+                    name="indicators"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_INDICATORS_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_INDICATORS_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
-                <field name="controls"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Left/right controls"
-                       description="Turn on or off left/right buttons.">
-                    <option value="1">JYES</option>
+
+                <field
+                    name="controls"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_CONTROLS_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_CONTROLS_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
-                <field name="pause"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Pauses on mouseenter?"
-                       description="Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave.">
-                    <option value="1">JYES</option>
+
+                <field
+                    name="pause"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_PAUSE_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_PAUSE_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
-                <field name="wrap"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Carousel loop"
-                       description="Whether the carousel should cycle continuously or have hard stops.">
-                    <option value="1">JYES</option>
+
+                <field
+                    name="wrap"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_WRAP_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_WRAP_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
-                <field name="keyboard"
-                       type="radio"
-                       class="btn-group btn-group-yesno radio"
-                       default="1"
-                       label="Keyboard control"
-                       description="Whether the carousel should react to keyboard events.">
-                    <option value="1">JYES</option>
+
+                <field
+                    name="keyboard"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_B3_CAROUSEL_FIELD_KEYBOARD_LABEL"
+                    description="MOD_B3_CAROUSEL_FIELD_KEYBOARD_DESC"
+                    default="1"
+                    filter="boolean"
+                >
                     <option value="0">JNO</option>
+                    <option value="1">JYES</option>
                 </field>
             </fieldset>
 
             <fieldset name="advanced">
-                <field name="layout"
-                       type="modulelayout"
-                       label="JFIELD_ALT_LAYOUT_LABEL"
-                       description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
-                <field name="moduleclass_sfx"
-                       type="textarea" rows="3"
-                       label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-                       description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-                <field name="cache"
-                       type="list"
-                       default="0"
-                       label="COM_MODULES_FIELD_CACHING_LABEL"
-                       description="COM_MODULES_FIELD_CACHING_DESC">
+                <field
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout"
+                />
+
+                <field
+                    name="moduleclass_sfx"
+                    type="textarea"
+                    label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                    rows="3"
+                    validate="CssIdentifier"
+                />
+
+                <field
+                    name="cache"
+                    type="list"
+                    label="COM_MODULES_FIELD_CACHING_LABEL"
+                    default="1"
+                    filter="integer"
+                    validate="options"
+                >
                     <option value="1">JGLOBAL_USE_GLOBAL</option>
                     <option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
                 </field>
-                <field name="cache_time"
-                       type="text"
-                       default="900"
-                       label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-                       description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-                <field name="cachemode"
-                       type="hidden"
-                       default="static">
+
+                <field
+                    name="cache_time"
+                    type="number"
+                    label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+                    default="900"
+                    filter="integer"
+                />
+
+                <field
+                    name="cachemode"
+                    type="hidden"
+                    default="static"
+                >
                     <option value="static"></option>
                 </field>
             </fieldset>
@@ -150,6 +195,6 @@
     </config>
 
     <updateservers>
-        <server type="extension" priority="1" name="B3 Carousel Module Update Site">https://raw.githubusercontent.com/hfittipaldi/mod_b3_carousel/master/manifest.xml</server>
+        <server type="extension" priority="1" name="B3 Carousel Module Update Site">https://raw.githubusercontent.com/hfittipaldi/mod_b3_carousel/master/updates.xml</server>
     </updateservers>
 </extension>

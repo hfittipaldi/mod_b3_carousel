@@ -5,14 +5,23 @@
  * @package     Joomla.Site
  * @subpackage  mod_b3_carousel
  *
- * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2020 Hugo Fittipaldi. All rights reserved.
- * @license     GNU General Public License version 2 or later;
+ * @license     GNU General Public License version 2 or later.
+ *
+ * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
+namespace Joomla\Module\B3Carousel\Site\Helper;
+
 // no direct access
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Table\Table;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
+use Joomla\Database\DatabaseInterface;
 
 /**
  * Helper for mod_b3_carousel
@@ -21,7 +30,7 @@ defined('_JEXEC') or die;
  * @subpackage  mod_b3_carousel
  * @since       1.0
  */
-class ModB3CarouselHelper
+class B3CarouselHelper
 {
     /**
      * [[Description]]
@@ -32,14 +41,14 @@ class ModB3CarouselHelper
      */
     public static function getUrl($image)
     {
-        $article = JTable::getInstance('content');
+        $article = Table::getInstance('content');
         $article->load($image->article_id);
         $catid = $article->get('catid');
 
         $route = $image->link;
         if ($image->article_id !== '')
         {
-            $route = ContentHelperRoute::getArticleRoute($image->article_id, $catid);
+            $route = RouteHelper::getArticleRoute($image->article_id, $catid);
         }
 
         return $route;

@@ -1,4 +1,13 @@
 # B3 Carousel Module
-B3 Carousel Module is a module for Joomla 3.6+ which displays a carousel of images.
+Is a module for Joomla! which displays a Bootstrap Carousel of images.
 
-It supports Bootstrap 3 and 4
+It supports Bootstrap 3, 4 and 5
+
+## Notes
+
+For old Bootstrap versions, choose the _bootstrap-*.php_ template.
+
+## Minimum Requirements
+
+* Joomla! 4.0
+* PHP 8.1

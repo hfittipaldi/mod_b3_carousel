@@ -1,74 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-    <fieldset name="section1" class="span4 form-vertical">
-        <field name="main_image"
-               type="media"
-               required="true"
-               preview="tooltip"
-               directory=""
-               label="Main image"
-               description="This is the main image for this slide" />
-        <field name="alternative_image"
-               type="media"
-               preview="tooltip"
-               directory=""
-               label="Alternative image"
-               description="Alternative image for small or extra small devices" />
-        <field name="title"
-               type="text"
-               default=""
-               label="Image title"
-               description="The title of the image" />
-        <field name="article_id"
-               type="modal_article"
-               default=""
-               label="Select an article"
-               description="">
-            <option value="">JDEFAULT</option>
-        </field>
-        <field name="link"
-               type="url"
-               default=""
-               label="Image link"
-               description="The link of the image" />
-        <field name="target"
-               type="radio"
-               class="btn-group btn-group-yesno"
-               default="1"
-               label="Image link target"
-               description="Choose where the link points to">
-            <option value="1">Self</option>
-            <option value="0">Blank</option>
-        </field>
-        <field name="publish_start"
-               type="calendar"
-               default="0000-00-00 00:00:00"
-               label="Start Publishing"
-               description=""
-               filter="user_utc"
-               showtime="true"
-               todaybutton="true"
-               filltable="false"
-               translateformat="true" />
-        <field name="publish_end"
-               type="calendar"
-               default="0000-00-00 00:00:00"
-               label="Finish Publishing"
-               description=""
-               filter="user_utc"
-               showtime="true"
-               todaybutton="true"
-               filltable="false"
-               translateformat="true" />
-    </fieldset>
+    <fieldset
+        name="section1"
+        addfieldprefix="Joomla\Component\Content\Administrator\Field">
+        <field
+            name="main_image"
+            type="media"
+            required="true"
+            preview="tooltip"
+            directory=""
+            label="MOD_B3_CAROUSEL_ITEM_MAIN_IMAGE_LABEL"
+            description=""
+        />
 
-    <fieldset name="section2" class="span8 form-vertical">
-        <field name="caption"
-               type="editor"
-               label="Image caption"
-               description="The caption text for the image (html)"
-               height="250"
-               buttons="false"
-               filter="safehtml" />
+        <field
+            name="alternative_image"
+            type="media"
+            preview="tooltip"
+            directory=""
+            label="MOD_B3_CAROUSEL_ITEM_ALT_IMAGE_LABEL"
+            description="MOD_B3_CAROUSEL_ITEM_ALT_IMAGE_DESC"
+        />
+
+        <field
+            name="title"
+            type="text"
+            default=""
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_TITLE_LABEL"
+            description="MOD_B3_CAROUSEL_ITEM_IMAGE_TITLE_DESC"
+        />
+
+
+        <field
+            name="article_link"
+            type="radio"
+            layout="joomla.form.field.radio.switcher"
+            label="MOD_B3_CAROUSEL_ITEM_ARTICLE_LINK_LABEL"
+            description=""
+            default="1"
+            filter="boolean"
+        >
+            <option value="0">MOD_B3_CAROUSEL_ITEM_ARTICLE_LINK_OPTION_0</option>
+            <option value="1">MOD_B3_CAROUSEL_ITEM_ARTICLE_LINK_OPTION_1</option>
+        </field>
+
+        <field
+            name="article_id"
+            type="modal_article"
+            label="MOD_B3_CAROUSEL_ITEM_ARTICLE_ID_LABEL"
+            description=""
+            select="true"
+            clear="true"
+            showon="article_link:1"
+        />
+
+        <field
+            name="link"
+            type="url"
+            default=""
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_LINK_LABEL"
+            description="MOD_B3_CAROUSEL_ITEM_IMAGE_LINK_DESC"
+            showon="article_link:0"
+        />
+
+        <field
+            name="target"
+            type="radio"
+            class="btn-group btn-group-yesno"
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_LINK_TARGET_LABEL"
+            description=""
+            default="1"
+            filter="boolean"
+        >
+            <option value="0">MOD_B3_CAROUSEL_ITEM_IMAGE_LINK_TARGET_OPTION_0</option>
+            <option value="1">MOD_B3_CAROUSEL_ITEM_IMAGE_LINK_TARGET_OPTION_1</option>
+        </field>
+
+        <field
+            name="publish_start"
+            type="calendar"
+            default="0000-00-00 00:00:00"
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_PUBLISH_START_LABEL"
+            description=""
+            filter="user_utc"
+            showtime="true"
+            todaybutton="true"
+            filltable="false"
+            translateformat="true"
+        />
+
+        <field
+            name="publish_end"
+            type="calendar"
+            default="0000-00-00 00:00:00"
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_PUBLISH_END_LABEL"
+            description=""
+            filter="user_utc"
+            showtime="true"
+            todaybutton="true"
+            filltable="false"
+            translateformat="true"
+        />
+
+        <field
+            name="caption"
+            type="editor"
+            label="MOD_B3_CAROUSEL_ITEM_IMAGE_CAPTION_LABEL"
+            description=""
+            height="250"
+            buttons="false"
+            editor="TinyMCE"
+            filter="safehtml"
+        />
     </fieldset>
 </form>

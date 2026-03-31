@@ -1,0 +1,51 @@
+/**
+ * B3 Carousel Module
+ *
+ * @package     Joomla.Site
+ * @subpackage  mod_b3_carousel
+ *
+ * @copyright   Copyright (C) 2020 Hugo Fittipaldi. All rights reserved.
+ * @license     GNU General Public License version 2 or later.
+ *
+ * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
+ * @link        https://github.com/hfittipaldi/mod_b3_carousel
+ */
+
+[id^="b3Carousel"] {
+    img {
+        width: 100%;
+    }
+
+    &.carousel-fade {
+        @media (min-width: 768px) {
+            .carousel-control {
+                z-index: 2;
+            }
+
+            .carousel-inner {
+                .item {
+                    transition-property: opacity;
+                }
+
+                .item,
+                .active.left,
+                .active.right {
+                    opacity: 0;
+                }
+
+                .active,
+                .next.left,
+                .prev.right {
+                    opacity: 1;
+                }
+
+                .next,
+                .prev,
+                .active.left,
+                .active.right {
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+        }
+    }
+}

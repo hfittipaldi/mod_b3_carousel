@@ -5,112 +5,138 @@
  * @package     Joomla.Site
  * @subpackage  mod_b3_carousel
  *
- * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @copyright   Copyright (C) 2020 Hugo Fittipaldi. All rights reserved.
- * @license     GNU General Public License version 2 or later;
+ * @license     GNU General Public License version 2 or later.
+ *
+ * @author      Hugo Fittipaldi <hugo.fittipaldi@gmail.com>
  * @link        https://github.com/hfittipaldi/mod_b3_carousel
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
-if ($images !== null) { ?>
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+use Joomla\Module\B3Carousel\Site\Helper\B3CarouselHelper;
 
-<div id="b3Carousel-<?php echo $module_id; ?>" class="b3Carousel carousel slide<?php echo $transition; ?>"
-     data-ride="carousel"<?php echo $interval . $pause . $wrap . $keyboard; ?>>
-    <?php if ($indicators === 1) { ?>
+$now = Factory::getDate();
+
+$transition = (int) $params->get('transition', 0) !== 0 ? ' carousel-fade' : '';
+
+$interval = (int) $params->get('interval', 5000);
+$interval = $interval !== 5000 ? ' data-bs-interval="' . $interval . '"': '';
+$interval = $params->get('autoslide', 1) ? $interval . ' data-bs-ride="carousel"': ' data-bs-interval="false"';
+
+$pause    = !$params->get('pause', 1) ? ' data-bs-pause="false"': '';
+$wrap     = !$params->get('wrap', 1) ? ' data-bs-wrap="false"': '';
+$keyboard = !$params->get('keyboard', 1) ? ' data-bs-keyboard="false"': '';
+
+// Slides
+$images = $params->get('slides');
+
+if ($images !== null) : ?>
+
+<div id="b3Carousel-<?= $module->id; ?>" class="b3Carousel carousel slide<?= $transition; ?>" data-bs-touch="true"<?= $interval . $pause . $wrap . $keyboard; ?>>
+    <?php if ($params->get('indicators')) { ?>
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    <div class="carousel-indicators">
     <?php
     $k = 0;
-    foreach ($images as $image)
-    {
+    foreach ($images as $image) :
         $publish_start = !empty($image->publish_start) ? $image->publish_start : $now;
         $publish_end   = !empty($image->publish_end) ? $image->publish_end : $now;
 
-        if ($now >= $publish_start && $now <= $publish_end)
-        {
-    ?>
-        <li data-target="#b3Carousel-<?php echo $module_id; ?>" data-slide-to="<?php echo $k; ?>"
-            <?php echo $k === 0 ? ' class="active"': ''; ?>></li>
+        if ($now >= $publish_start && $now <= $publish_end) : ?>
+
+        <button type="button" data-bs-target="#b3Carousel-<?=$module->id;?>" data-bs-slide-to="<?=$k;?>"<?= $k === 0 ? ' class="active" aria-current="true"' : ''; ?> aria-label="Slide 1"></button>
+
     <?php $k++;
-        } // Endif
-    } // Endforeach ?>
-    </ol>
+        endif;
+    endforeach; ?>
+    </div>
     <?php } // Endif ?>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner">
 
     <?php
     $styles = '';
     $k = 0;
-    foreach ($images as $image)
-    {
-        if ($image->alternative_image !== '')
-        {
+    foreach ($images as $image) :
+        if ($image->alternative_image !== '') {
             $styles .= '
-.item-' . $module_id . '-' . $k . ' {
-    background-image:url(' . JUri::base() . $image->alternative_image . ');
+.item-' . $module->id . '-' . $k . ' {
+    background-image:url(' . Uri::base() . $image->alternative_image . ');
 }';
         }
 
         $alt = $image->title;
-        if ($alt === '')
-        {
+        if ($alt === '') {
             $parts = explode('/', $image->main_image);
             $alt = array_pop($parts);
         }
 
-        $link = modB3CarouselHelper::getUrl($image);
+        $link = B3CarouselHelper::getUrl($image);
+        $imageAttrs = HTMLHelper::cleanImageURL($image->main_image);
 
         $publish_start = !empty($image->publish_start) ? $image->publish_start : $now;
         $publish_end   = !empty($image->publish_end) ? $image->publish_end : $now;
-        if ($now >= $publish_start && $now <= $publish_end)
-        {
-        ?>
-        <figure class="<?php echo $item; ?>item item-<?php echo $module_id . '-' . $k . ($k === 0 ? ' active' : ''); ?>">
-            <?php if ($link !== '') { ?>
-            <a href="<?php echo JRoute::_($link); ?>"<?php echo $image->target == 0 ? ' target="_blank"' : ''; ?>>
-                <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $alt; ?>" />
-            </a>
-            <?php } else { ?>
-            <img src="<?php echo JUri::base() . $image->main_image; ?>" alt="<?php echo $alt; ?>" />
-            <?php } // Endif ?>
+        if ($now >= $publish_start && $now <= $publish_end) : ?>
 
-            <?php if ($image->caption) { ?>
-            <figcaption class="carousel-caption">
-                <?php echo $image->caption; ?>
-            </figcaption>
-            <?php } // Endif ?>
-        </figure>
+        <div class="carousel-item item-<?= $module->id . '-' . $k . ($k === 0 ? ' active' : ''); ?>">
+            <?php if ($link !== '') : ?>
+            <a href="<?= Route::_($link); ?>"<?= $image->target == 0 ? ' target="_blank"' : ''; ?>>
+                <img src="<?= Uri::base() . $imageAttrs->url; ?>" alt="<?= $alt; ?>" />
+            </a>
+            <?php else : ?>
+            <img src="<?= Uri::base() . $imageAttrs->url; ?>" alt="<?= $alt; ?>" />
+            <?php endif; ?>
+
+            <?php if ($image->caption) : ?>
+            <div class="carousel-caption">
+                <?= $image->caption; ?>
+            </div>
+            <?php endif; ?>
+
+        </div>
     <?php $k++;
-        }
-    } ?>
+        endif;
+    endforeach; ?>
     </div>
 
-    <?php if ($controls === 1) { ?>
+    <?php if ($params->get('controls')) : ?>
     <!-- Controls -->
-    <a class="<?php echo $ctrlPrev; ?>" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="prev">
-        <span class="<?php echo $spanPrev; ?>" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="<?php echo $ctrlNext; ?>" href="#b3Carousel-<?php echo $module_id; ?>" role="button" data-slide="next">
-        <span class="<?php echo $spanNext; ?>" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    <?php } // Endif ?>
+    <button class="carousel-control-prev" type="button" data-bs-target="#b3Carousel-<?=$module->id;?>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#b3Carousel-<?=$module->id;?>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    <?php endif; ?>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myCarouselElement = document.getElementById('b3Carousel-<?=$module->id;?>');
+        var carousel = new bootstrap.Carousel(myCarouselElement);
+    });
+</script>
 
     <?php
-    if ($styles !== '')
-    {
-        $doc->addStyleDeclaration($styles);
-    }
-} else {
-?>
+    if ($styles !== '') :
+        $wa->addInlineStyle($styles);
+    endif;
+
+else : ?>
+
 <div class="alert alert-warning" role="alert">
-    <strong>Atenção: </strong>Não existe nehuma imagem cadastrada.
+    <?= Text::_('MOD_B3_CAROUSEL_NO_IMAGE'); ?>
 </div>
-<?php } ?>
+
+<?php endif;
